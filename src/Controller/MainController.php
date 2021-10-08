@@ -1,5 +1,7 @@
 <?php
 
+use Symfony\Component\HttpFoundation\Response;
+
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,4 +19,20 @@ class MainController extends AbstractController
     {
         return $this->render('main/home.html.twig');
     }
+
+    /** page de profil
+     *
+     * @Route("/mon-profil", name="main_profil")
+     * @Security("is_granted("ROLE_USER')")
+     */
+    public function profil(): Response
+    {
+        return $this->render('main/profil.html.twig');
+    }
+
+
 }
+
+
+
+
