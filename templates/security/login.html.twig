@@ -1,46 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Connexion{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block body %}
 
     <div class="container-fluid">
 
         <div class="row">
-            <h1 class="col-12 text-center my-5">Connexion</h1>
+            <h1 class="col-12 text-center my-5">Le Blog de Batman</h1>
         </div>
 
         <div class="row">
-            <div class="col-12 col-md-4 offset-md-4">
 
-                <form method="POST">
-                    {% if error %}
-                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                    {% endif %}
+            <h2 class="text-center col-12 my-4">Lorem ipsum dolor sit amet, consectetur.</h2>
 
-                    <div class="mb-3">
-                        <label for="inputEmail" class="form-label">Adresse Email</label>
-                        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
-                    </div>
+            <p class="col-12 col-md-10 offset-md-1 text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad asperiores aut commodi consequatur, cupiditate, dolor dolorum est, explicabo in iste mollitia natus necessitatibus odio officia possimus quasi quia quibusdam ratione reiciendis sed sequi soluta suscipit unde vel veritatis voluptate? Aperiam dolorem porro quo ut voluptas. Officiis omnis voluptas voluptatum.</p>
 
-                    <div class="mb-3">
-                        <label class="form-label" for="inputPassword">Mot de passe</label>
-                        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-                    </div>
-
-                    <input type="hidden" name="_csrf_token"
-                           value="{{ csrf_token('authenticate') }}"
-                    >
-
-                    <div class="mb-3">
-                        <input type="submit" class="btn btn-outline-primary w-100" value="Connexion">
-                    </div>
-
-                </form>
-
-            </div>
         </div>
 
+        {# Affichage de l'image fixe en bandeau #}
+        <div class="batman-cover row my-5"></div>
+
     </div>
+
 
 {% endblock %}
