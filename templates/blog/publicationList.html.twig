@@ -1,34 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Liste des publications{% endblock %}
 
 {% block body %}
 
     <div class="container-fluid">
 
         <div class="row">
-            <h1 class="col-12 text-center my-5">{{ site_name }}</h1>
+            <h1 class="col-12 text-center my-5">Publications du Blog de Batman</h1>
         </div>
 
-        <div class="row">
-
-            <h2 class="text-center col-12 my-4">Lorem ipsum dolor sit amet, consectetur.</h2>
-
-            <p class="col-12 col-md-10 offset-md-1 text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium ad asperiores aut commodi consequatur, cupiditate, dolor dolorum est, explicabo in iste mollitia natus necessitatibus odio officia possimus quasi quia quibusdam ratione reiciendis sed sequi soluta suscipit unde vel veritatis voluptate? Aperiam dolorem porro quo ut voluptas. Officiis omnis voluptas voluptatum.</p>
-
-        </div>
-
-        {# Affichage de l'image fixe en bandeau #}
-        <div class="batman-cover row my-5"></div>
-
-        {# Affichage des derniers articles publiés #}
         <div class="row">
 
             <div class="col-12 col-md-8 offset-md-2">
 
                 <div class="row">
-                    <h2 class="col-12 text-center">Dernières publications</h2>
+                    <p class="col-12 text-center">Nombre total d'articles : {{ articles.getTotalItemCount }}</p>
                 </div>
+
+                {# S'il y a des articles, on affiche le menu de pagination #}
+                {% if articles is not empty %}
+
+                    <div class="row">
+                        <div class="col-12 my-3 text-center">
+                            <div class="d-inline-block">
+                                {{ knp_pagination_render(articles) }}
+                            </div>
+                        </div>
+                    </div>
+
+                {% endif %}
 
                 {% for article in articles %}
 
@@ -51,6 +52,14 @@
 
                                     <footer class="blockquote-footer my-2">Publié le <strong>{{ article.publicationDate|date('d/m/Y à H\\hi') }}</strong> par <strong>{{ article.author.pseudonym }}</strong></footer>
 
+                                    {% if is_granted('ROLE_ADMIN') %}
+
+                                        <p class="mb-0 mt-3">
+                                            <a class="text-decoration-none text-danger" href="{{ path('blog_publication_delete', {'id': article.id, csrf_token: csrf_token('blog_publication_delete_' ~ article.id ) }) }}"><i class="fas fa-trash-alt me-1"></i>Supprimer</a>
+                                        </p>
+
+                                    {% endif %}
+
                                 </div>
 
                             </div>
@@ -66,23 +75,25 @@
 
                 {% endfor %}
 
+                {# S'il y a des articles, on affiche le menu de pagination #}
+                {% if articles is not empty %}
+
+                    <div class="row">
+                        <div class="col-12 my-3 text-center">
+                            <div class="d-inline-block">
+                                {{ knp_pagination_render(articles) }}
+                            </div>
+                        </div>
+                    </div>
+
+                {% endif %}
+
+
             </div>
-
-        </div>
-
-        <div class="row mb-5">
-
-            <h2 class="text-center col-12 my-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h2>
-
-            <p class="col-12 col-md-10 offset-md-1 text-center mb-5">Lorem ipsum dolor sit amet, consectetur adipisicing
-                elit. Ab aliquid consequatur dignissimos eum obcaecati praesentium. Assumenda dolores dolorum esse
-                laboriosam, libero natus quod sapiente! Accusamus animi commodi, cumque eaque eligendi facere fugiat
-                harum libero magni maxime, minus nesciunt nihil porro provident quas qui quisquam quo rerum totam ut?
-                Alias, magnam!</p>
 
         </div>
 
     </div>
 
-
 {% endblock %}
+

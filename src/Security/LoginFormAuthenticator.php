@@ -50,8 +50,8 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        // redirection de l'utilisateur sur l'accueil quand il a reussi a se connecter
-        return new RedirectResponse($this->urlGenerator->generate('some_route'));
+        // Redirection de l'utilisateur sur l'accueil quand il a réussi à se connecter
+        return new RedirectResponse($this->urlGenerator->generate('main_home'));
     }
 
     protected function getLoginUrl(Request $request): string
